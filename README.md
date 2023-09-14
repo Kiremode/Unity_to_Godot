@@ -12,8 +12,8 @@ This is a small work-in-progress tool that will allow users to "easily" port uni
 - [X] `void FixedUpdate()` to Godots `public override void _PhysicsProcess(float delta)`
 - [X] `public int ` etc  to Godots  `[Export] public`
 - [X] `Debug.Log()` to Godots `GD.Print`
-- [ ] `Awake()`: `public override void _Ready()`
-- [ ] `LateUpdate()`: `public override void _Process(float delta)` (Use a higher process priority if needed)
+- [X] `Awake()`: `public override _EnterTree()`
+- [X] `LateUpdate()`: `public override void _PhysicsProcess(float delta)` (Use a higher process priority if needed)
 - [ ] `OnGUI()`: No direct equivalent, GUI in Godot is handled through the `Control` node and its subclasses
 - [ ] `OnDisable()`: `public override void _ExitTree()`
 - [ ] `OnEnable()`: `public override void _EnterTree()`
