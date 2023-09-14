@@ -5,7 +5,7 @@ def regEx_search(write_to_file,input):
     input = unity_class_to_godot_class(input)
     input = debug_log_to_GD_Print(input)
     input = change_public_variables(input)
-    
+    print(get_axis_to_godot(input))
     return input
 
 #debug.log to GD.Print conversion function
@@ -23,16 +23,29 @@ def change_public_variables(input):
     new_code = re.sub(r"(public)\s+(string|float|int|double)\s+(\w+)", r"[Export]\n\t\1 \2 \3",input)
     return new_code
 
-def get_axis_to_godot(input):
+def get_axis_to_godot(code):
 
-       # Regex pattern
-    pattern = r"float (?P<horizontal>\w+) = Input\.GetAxis\(\"Horizontal\"\);\s+float (?P<vertical>\w+) = Input\.GetAxis\(\"Vertical\"\);\s+Vector3 (?P<movement>\w+) = new Vector3\(\k<horizontal>, 0.0f, \k<vertical>\);"
+    # Regex patterns
+    pattern = r"float\s+(?P<horizontal>\w+)\s+=\s+Input\.GetAxis\(\"Horizontal\"\);"
+    pattern1 = r"float\s+(?P<vertical>\w+)\s+=\s+Input\.GetAxis\(\"Vertical\"\);"
 
     # Replacement pattern
-    replacement = r'Vector2 inputDir = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");\n\tVector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();'
+    replacement = r'Vector2 inputDir = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");'
 
-    # Substitute
-    new_code = re.sub(pattern, replacement, input)
+    #this is jank but it is 2:30 am and I am tired
+    new_code = code
+    if pattern != replacement and pattern != replacement:
+        new_code = re.sub(pattern, " ", code)
+        new_code = re.sub(pattern1, replacement, new_code)
+        
+    #a for loop that goes through the new_code to check if the replacement is in the new_code abd if it is there more then once all extra instances are removed
+    for match in re.finditer(pattern, new_code):
+        if match.group(0) == replacement:
+            pass
+        else:
+            new_code = new_code.replace(match.group(0), "")
 
-    print(new_code)
+    if pattern == replacement and pattern1 == replacement:
+        pattern1 = ""
+
     return new_code
