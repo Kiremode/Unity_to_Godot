@@ -1,6 +1,6 @@
 #unity script to godot script converter
 import re
-from scripts.look_up_table import look_up
+from scripts.look_up_table import look_up_table, look_up
 from scripts.regEx_search import regEx_search
 
 file = input("Enter the folder path: ")
@@ -25,7 +25,9 @@ def convert(file):
     for line in file_read:
         #go through each key in the look_up table
         line = regEx_search(new_file,line)
+        line = look_up_table(line)
         for command, replacement in look_up.items():
+            pass
             #if the key is in the line
             if command in line:
                 #replace the key with the value

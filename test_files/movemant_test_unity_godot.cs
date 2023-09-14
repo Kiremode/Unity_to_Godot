@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Godot;
+using UnityEngine;
 
 public partial class test : Node
 {
@@ -10,10 +10,10 @@ public partial class test : Node
     private float y;
 
     // Update is called once per frame
-    public override void _Process(float delta):
+    public public override void _Process(float delta)
     {
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
+         
+        Vector2 inputDir = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
 
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
 

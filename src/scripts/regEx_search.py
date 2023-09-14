@@ -5,7 +5,7 @@ def regEx_search(write_to_file,input):
     input = unity_class_to_godot_class(input)
     input = debug_log_to_GD_Print(input)
     input = change_public_variables(input)
-    print(get_axis_to_godot(input))
+    input = get_axis_to_godot(input)
     return input
 
 #debug.log to GD.Print conversion function

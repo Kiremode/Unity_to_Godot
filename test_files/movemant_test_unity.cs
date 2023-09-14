@@ -9,7 +9,7 @@ public class test : MonoBehaviour
     private float y;
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
