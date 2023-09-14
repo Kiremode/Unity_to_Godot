@@ -12,12 +12,12 @@ This is a small work-in-progress tool that will allow users to "easily" port uni
 - [X] `void FixedUpdate()` to Godots `public override void _PhysicsProcess(float delta)`
 - [X] `public int ` etc  to Godots  `[Export] public`
 - [X] `Debug.Log()` to Godots `GD.Print`
-- [X] `Awake()`: `public override _EnterTree()`
+- [X] `Awake()`: `public override _Ready()`
 - [X] `LateUpdate()`: `public override void _PhysicsProcess(float delta)` (Use a higher process priority if needed)
 - [ ] `OnGUI()`: No direct equivalent, GUI in Godot is handled through the `Control` node and its subclasses
-- [ ] `OnDisable()`: `public override void _ExitTree()`
-- [ ] `OnEnable()`: `public override void _EnterTree()`
-- [ ] `OnDestroy()`: `public override void _ExitTree()`
+- [X] `OnDisable()`: `public override void _ExitTree()`
+- [X] `OnEnable()`: `public override void _EnterTree()`
+- [X] `OnDestroy()`: `public override void _ExitTree()`
 - [ ] `OnCollisionEnter()`: `public void _on_Area2D_area_entered(Area2D area)`
 - [ ] `OnCollisionExit()`: `public void _on_Area2D_area_exited(Area2D area)`
 - [ ] `OnCollisionStay()`: No direct equivalent, custom code may be required

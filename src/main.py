@@ -5,6 +5,14 @@ from scripts.regEx_search import regEx_search
 
 file = input("Enter the folder path: ")
 
+#redesign: 
+# get output folder
+# recreate folder structure
+# check if 2D or 3D
+#remove the public / private / protected keywords by voides
+# make a function that goes over the lookuptable and replaces the keys with the values
+# go through each line of the file and replace the keys with the values with the regex function
+
 def convert(file):
     #remove the .cs extension
     file_read = open(file, "r")
