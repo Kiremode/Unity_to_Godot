@@ -1,2 +1,108 @@
 # Unity to Godot
 This is a small work-in-progress tool that will allow users to "easily" port unity C# scripts to Godot C#
+
+## Checklist for the most important Unity functions
+- [X] convert class (it will be a Node you need to change it to the Node you want)
+- [X] `using UnityEngine` to `using Godot`
+- [X] `void Start()` to Godots `public override void _Ready()`
+- [X] `void Update()` to Godots `public override void _Process(float delta)`
+- [X] `void FixedUpdate()` to Godots `public override void _PhysicsProcess(float delta)`
+- [X] `public int ` etc  to Godots  `[Export] public`
+- [X] `Debug.Log()` to Godots `GD.Print`
+- [ ] `Awake()`: `public override void _Ready()`
+- [ ] `LateUpdate()`: `public override void _Process(float delta)` (Use a higher process priority if needed)
+- [ ] `OnGUI()`: No direct equivalent, GUI in Godot is handled through the `Control` node and its subclasses
+- [ ] `OnDisable()`: `public override void _ExitTree()`
+- [ ] `OnEnable()`: `public override void _EnterTree()`
+- [ ] `OnDestroy()`: `public override void _ExitTree()`
+- [ ] `OnCollisionEnter()`: `public void _on_Area2D_area_entered(Area2D area)`
+- [ ] `OnCollisionExit()`: `public void _on_Area2D_area_exited(Area2D area)`
+- [ ] `OnCollisionStay()`: No direct equivalent, custom code may be required
+- [ ] `OnTriggerEnter()`: `public void _on_Area2D_body_entered(Node body)`
+- [ ] `OnTriggerExit()`: `public void _on_Area2D_body_exited(Node body)`
+- [ ] `OnTriggerStay()`: No direct equivalent, custom code may be required
+- [ ] `OnMouseDown()`: `public override void _Input(InputEvent @event)`
+- [ ] `OnMouseUp()`: `public override void _Input(InputEvent @event)`
+- [ ] `OnMouseDrag()`: `public override void _Input(InputEvent @event)`
+- [ ] `OnMouseOver()`: `public override void _Input(InputEvent @event)`
+- [ ] `OnMouseEnter()`: `public override void _Input(InputEvent @event)`
+- [ ] `OnMouseExit()`: `public override void _Input(InputEvent @event)`
+- [ ] `OnMouseUpAsButton()`: `public override void _Input(InputEvent @event)`
+- [ ] `OnParticleCollision()`: No direct equivalent, custom code may be required
+- [ ] `OnControllerColliderHit()`: No direct equivalent, custom code may be required
+- [ ] `OnJointBreak()`: No direct equivalent, custom code may be required
+- [ ] `OnBecameVisible()`: `public override void _Process(float delta)` (Check if the object is inside the Camera's frustum)
+- [ ] `OnBecameInvisible()`: `public override void _Process(float delta)` (Check if the object is outside the Camera's frustum)
+- [ ] `OnDrawGizmos()`: No direct equivalent, custom code may be required
+- [ ] `OnDrawGizmosSelected()`: No direct equivalent, custom code may be required
+- [ ] `OnApplicationQuit()`: `public override void _Notification(int what)` (Check if `what` is `MainLoop.NotificationWmQuitRequest`)
+- [ ] `OnApplicationFocus()`: `public override void _Notification(int what)` (Check if `what` is `MainLoop.NotificationWmFocusIn` or `MainLoop.NotificationWmFocusOut`)
+- [ ] `OnApplicationPause()`: `public override void _Notification(int what)` (Check if `what` is `MainLoop.NotificationWmGoAway`)
+- [ ] `OnValidate()`: No direct equivalent, custom code may be required
+- [ ] `OnRenderObject()`: No direct equivalent, custom code may be required
+- [ ] `OnWillRenderObject()`: No direct equivalent, custom code may be required
+- [ ] `OnPostRender()`: No direct equivalent, custom code may be required
+- [ ] `OnPreRender()`: No direct equivalent, custom code may be required
+- [ ] `OnRenderImage()`: No direct equivalent, custom code may be required
+- [ ] `OnDidApplyAnimationProperties()`: No direct equivalent, custom code may be required
+- [ ] `OnTransformChildrenChanged()`: `public override void _Notification(int what)` (Check if `what` is `Node.NotificationParented` or `Node.NotificationUnparented`)
+- [ ] `OnTransformParentChanged()`: `public override void _Notification(int what)` (Check if `what` is `Node.NotificationParented` or `Node.NotificationUnparented`)
+- [ ] `OnRectTransformDimensionsChange()`: No direct equivalent, custom code may be required
+- [ ] `OnRectTransformRemoved()`: No direct equivalent, custom code may be required
+- [ ] `OnBeforeTransformParentChanged()`: `public override void _Notification(int what)` (Check if `what` is `Node.NotificationParented`)
+- [ ] `OnCanvasGroupChanged()`: No direct equivalent, custom code may be required
+- [ ] `OnCanvasHierarchyChanged()`: No direct equivalent, custom code may be required
+- [ ] `OnParticleUpdateJobScheduled()`: No direct equivalent, custom code may be required
+- [ ] `OnParticleSystemStopped()`: No direct equivalent, custom code may be required
+- [ ] `OnParticleSystemTrigger()`: No direct equivalent, custom code may be required
+- [ ] `OnParticleSystemUpdate()`: No direct equivalent, custom code may be required
+- [ ] `transform`: `Node`
+- [ ] `gameObject`: `Node`
+- [ ] `name`: `Node.name`
+- [ ] `tag`: `Node.get_groups()`
+- [ ] `rigidbody`: `RigidBody`
+- [ ] `collider`: `CollisionObject`
+- [ ] `meshFilter`: `MeshInstance`
+- [ ] `meshRenderer`: `MeshInstance`
+- [ ] `audioSource`: `AudioStreamPlayer`
+- [ ] `audioClip`: `AudioStream`
+- [ ] `camera`: `Camera`
+- [ ] `light`: `Light`
+- [ ] `material`: `Material`
+- [ ] `shader`: `Shader`
+- [ ] `texture`: `Texture`
+- [ ] `animator`: `AnimationPlayer`
+- [ ] `animation`: `AnimationPlayer`
+- [ ] `spriteRenderer`: `Sprite`
+- [ ] `boxCollider`: `BoxShape`
+- [ ] `sphereCollider`: `SphereShape`
+- [ ] `capsuleCollider`: `CapsuleShape`
+- [ ] `meshCollider`: `MeshInstance`
+- [ ] `characterController`: `KinematicBody`
+- [ ] `particleSystem`: `Particles`
+- [ ] `navMeshAgent`: `NavigationAgent`
+- [ ] `canvas`: `CanvasLayer`
+- [ ] `canvasGroup`: `Control`
+- [ ] `canvasRenderer`: `CanvasItem`
+- [ ] `graphicRaycaster`: `Node2D`
+- [ ] `image`: `TextureRect`
+- [ ] `text`: `Label`
+- [ ] `button`: `Button`
+- [ ] `slider`: `HSlider`
+- [ ] `scrollbar`: `VScrollBar`
+- [ ] `toggle`: `CheckBox`
+- [ ] `inputField`: `LineEdit`
+- [ ] `dropdown`: `OptionButton`
+- [ ] `scrollRect`: `ScrollContainer`
+- [ ] `rectTransform`: `Control.rect_min_size`
+- [ ] `layoutElement`: `Control`
+- [ ] `layoutGroup`: `BoxContainer`
+- [ ] `horizontalLayoutGroup`: `HBoxContainer`
+- [ ] `verticalLayoutGroup`: `VBoxContainer`
+- [ ] `gridLayoutGroup`: `GridContainer`
+- [ ] `aspectRatioFitter`: `KeepAspectContainer`
+- [ ] `contentSizeFitter`: `Control`
+- [ ] `input`: `Input`
+- [ ] `time`: `Engine.get_time_since_startup()`
+- [ ] `screen`: `OS`
+- [ ] `qualitySettings`: `VisualServer`
