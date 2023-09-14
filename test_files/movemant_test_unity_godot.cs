@@ -10,7 +10,7 @@ public partial class test : Node
     private float y;
 
     // Update is called once per frame
-    public override void _Process(float delta):
+    public override void _Process(float delta)
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
