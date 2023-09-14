@@ -1,6 +1,9 @@
 # Unity to Godot
 This is a small work-in-progress tool that will allow users to "easily" port unity C# scripts to Godot C#
 
+> :warning: **Caution**: This script has the potential to disrupt your existing code. Please use it at your own risk. I cannot be held responsible for any adverse effects it may cause.
+
+>the Reason i create it is to make it simpeler for unity Devs to port the game to **GODOT 4.1**
 ## Checklist for the most important Unity functions
 - [X] convert class (it will be a Node you need to change it to the Node you want)
 - [X] `using UnityEngine` to `using Godot`
